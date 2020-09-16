@@ -3,16 +3,10 @@
 from nltk.corpus import stopwords
 from nltk import wordpunct_tokenize
 
-test = wordpunct_tokenize("tout d'abord, nous allons commencer par découper notre text en mots. C'est ce qu'on appelle la tokenisation ou tokenizer en anglais")
-print(test)
-
-language = stopwords.fileids()
-print(language)
-
-frStopword = stopwords.words('french')[0:10]
-print(frStopword)
 
 def _calc_ratios(text):
+    # Input : a text wich is a caracter string
+    # Output : a dictionary with in key the language and in values the ratio of words in this language
      ratios = {}
     
      tokens = wordpunct_tokenize(text)
@@ -28,12 +22,16 @@ def _calc_ratios(text):
      return ratios
 
 def _calc_probability(most, secode_most) :
+    # Input : 2 int
+    # Output : a int
     proba = (float(most) /(most + secode_most) * 100)
-    return round(proba)
+    return round(proba) 
 
 
 def detect_language(text):
-
+    # Input : a text which is a string of caracter
+    # Output : nothing
+    # Goals : find the language of a the text it's a prediction
      ratios = _calc_ratios(text)
     
      most_rated_language = max(ratios, key=ratios.get)
